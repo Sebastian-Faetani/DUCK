@@ -4,8 +4,8 @@ extends CharacterBody3D
 @onready var ray_cast_3d = $RayCast3D
 @onready var shoot_sound = $ShootSound
 
-const SPEED = 5.0
-const MOUSE_SENS = 0.5
+@export var SPEED = 5.0
+@export var MOUSE_SENS = 0.5
 
 var can_shoot = true
 var dead = false
@@ -18,8 +18,12 @@ func _ready():
 func _input(event):
 	if dead:
 		return
+	
+	
 	if event is InputEventMouseMotion:
 		rotation_degrees.y -= event.relative.x * MOUSE_SENS
+		rotation_degrees.x -= event.relative.y * MOUSE_SENS
+		rotation.x = clamp(rotation.x, deg_to_rad(-70), deg_to_rad(90))
 
 func _process(delta):
 	if Input.is_action_just_pressed("exit"):
@@ -44,7 +48,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
 	move_and_slide()
 
 func restart():
@@ -66,3 +70,4 @@ func kill():
 	dead = true
 	$CanvasLayer/DeathScreen.show()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+

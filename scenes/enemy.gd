@@ -39,3 +39,4 @@ func kill():
 	animated_sprite_3d.play("death")
 	$CollisionShape3D.disabled = true
 
+
