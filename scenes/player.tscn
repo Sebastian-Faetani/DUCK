@@ -66,6 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.206848, 4.76837e-07, 0.102
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_k22a3")
+MOUSE_SENS = 0.2
 
 [node name="StandingCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

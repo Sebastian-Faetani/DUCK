@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqdu0ycnp0l48"]
+
+[ext_resource type="PackedScene" uid="uid://b65t1sm7ho4fk" path="res://assets/blenderFiles/tutorialMap.blend" id="1_xyeqy"]
+[ext_resource type="Texture2D" uid="uid://brkip5wk60hhj" path="res://assets/worldTextures/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="2_iuoun"]
+[ext_resource type="PackedScene" uid="uid://dq5irbtv6gjdd" path="res://scenes/player.tscn" id="3_tsnqh"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_x7npc"]
+panorama = ExtResource("2_iuoun")
+
+[sub_resource type="Sky" id="Sky_478c2"]
+sky_material = SubResource("PanoramaSkyMaterial_x7npc")
+
+[sub_resource type="Environment" id="Environment_epbs4"]
+background_mode = 2
+sky = SubResource("Sky_478c2")
+
+[node name="TutorialMap" type="Node3D"]
+
+[node name="Enviroment" type="Node3D" parent="."]
+
+[node name="tutorialMap" parent="Enviroment" instance=ExtResource("1_xyeqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102936, 0, 0.94112)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_epbs4")
+
+[node name="Player" parent="." instance=ExtResource("3_tsnqh")]
+transform = Transform3D(-0.368238, 0, -0.929731, 0, 1, 0, 0.929731, 0, -0.368238, -0.206848, 0.00168693, -3.76255)
