@@ -1,11 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://dq5irbtv6gjdd"]
+[gd_scene load_steps=16 format=3 uid="uid://dq5irbtv6gjdd"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_k22a3"]
 [ext_resource type="Texture2D" uid="uid://jqkxxpg37dml" path="res://assets/Weapons/bread_gun_sprite.png" id="2_3m40k"]
+[ext_resource type="Texture2D" uid="uid://cc6glxu4ad6i7" path="res://assets/UI/HealthBarBelow.png" id="2_m7cuu"]
 [ext_resource type="Texture2D" uid="uid://bs1vyu60eflw8" path="res://assets/Weapons/BreadCrosshair.png" id="3_7spr2"]
+[ext_resource type="Texture2D" uid="uid://dlkga0yqukreo" path="res://assets/UI/HealthBarOverPart.png" id="3_duy5l"]
 [ext_resource type="AudioStream" uid="uid://d1ale4b1ubwvs" path="res://assets/Weapons/revolver_shot1.wav" id="3_qq5ud"]
+[ext_resource type="Script" path="res://scenes/HealthBar.gd" id="4_nrjlt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq845"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqa1m"]
+height = 1.2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bpdsh"]
 atlas = ExtResource("2_3m40k")
@@ -60,21 +66,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.206848, 4.76837e-07, 0.102
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_k22a3")
-SPEED = 10.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="StandingCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_pq845")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+[node name="CrouchingCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59613, 0)
+shape = SubResource("CapsuleShape3D_eqa1m")
+disabled = true
+
+[node name="HeadBumpCheck" type="RayCast3D" parent="."]
+target_position = Vector3(0, 2, 0)
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00555629, 1.5242, 0.0487224)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001634, 0)
+
+[node name="ShootingRay" type="RayCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00555629, -0.00019753, -0.0487224)
 target_position = Vector3(0, 0, -1000)
 collision_mask = 3
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -102.0
+offset_right = 32.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+step = 0.01
+fill_mode = 3
+texture_under = ExtResource("2_m7cuu")
+texture_progress = ExtResource("3_duy5l")
+script = ExtResource("4_nrjlt")
+player = NodePath("../..")
 
 [node name="GunBase" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -158,13 +194,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_7spr2")
+expand_mode = 1
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_qq5ud")

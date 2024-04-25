@@ -1,15 +1,19 @@
 extends CharacterBody3D
 
+class_name Enemy
+
 @onready var animated_sprite_3d = $AnimatedSprite3D
 
-@export var move_speed = 2.0
+@export var move_speed = 6.0
 @export var attack_range = 2.0
+@export var enemy_health = 20
+@export var enemyDamage = 0.001
 
 @onready var player : CharacterBody3D = get_tree().get_first_node_in_group("player")
-var dead = false
+var enemyDead = false
 
 func _physics_process(delta):
-	if dead:
+	if enemyDead:
 		return
 	if player == null:
 		return
@@ -22,6 +26,7 @@ func _physics_process(delta):
 	move_and_slide()
 	attempt_to_kill_player()
 
+#KillingPlayer
 func attempt_to_kill_player():
 	var dist_to_player = global_position.distance_to(player.global_position)
 	if dist_to_player > attack_range:
@@ -31,10 +36,10 @@ func attempt_to_kill_player():
 	var query = PhysicsRayQueryParameters3D.create(global_position+eye_line, player.global_position+eye_line, 1)
 	var result = get_world_3d().direct_space_state.intersect_ray(query)
 	if result.is_empty():
-		player.kill()
+		player.takeDamage()
 
-func kill():
-	dead = true
+func enemyDeath():
+	enemyDead = true
 	$DeathSound.play()
 	animated_sprite_3d.play("death")
 	$CollisionShape3D.disabled = true
