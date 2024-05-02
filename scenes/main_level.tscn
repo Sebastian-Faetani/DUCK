@@ -1,0 +1,130 @@
+[gd_scene load_steps=11 format=3 uid="uid://del3xlyon0j41"]
+
+[ext_resource type="Texture2D" uid="uid://bkrgwalj64mx4" path="res://assets/worldTextures/prototype-texture-with-size.png" id="1_k7yep"]
+[ext_resource type="PackedScene" uid="uid://dq5irbtv6gjdd" path="res://scenes/player.tscn" id="2_axskv"]
+[ext_resource type="PackedScene" uid="uid://bbfpbj3rbkleb" path="res://scenes/gun_pickup.tscn" id="3_gw6my"]
+[ext_resource type="PackedScene" uid="uid://detqv1egjtttf" path="res://scenes/enemy.tscn" id="4_3pdhc"]
+[ext_resource type="Texture2D" uid="uid://bv1rvjfoq87vf" path="res://assets/worldTextures/SECRETO.png" id="5_stjhd"]
+[ext_resource type="Texture2D" uid="uid://d2w4x78ngvtej" path="res://assets/worldTextures/SALIDA.png" id="6_ch3ja"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jg6fh"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_hrph8"]
+sky_material = SubResource("ProceduralSkyMaterial_jg6fh")
+
+[sub_resource type="Environment" id="Environment_yjgcu"]
+background_mode = 2
+sky = SubResource("Sky_hrph8")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnwm5"]
+albedo_texture = ExtResource("1_k7yep")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="MainLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yjgcu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+
+[node name="Room" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_fnwm5")
+use_collision = true
+flip_faces = true
+size = Vector3(8, 4, 8)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256059, 0)
+
+[node name="Corridor" type="CSGBox3D" parent="Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -5.994)
+flip_faces = true
+size = Vector3(3, 1.5, 4)
+
+[node name="Corridor2" type="CSGBox3D" parent="Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.935, -1.5, -3.85667)
+flip_faces = true
+size = Vector3(3, 1.5, 7.88666)
+
+[node name="Corridor3" type="CSGBox3D" parent="Room/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.3589, -1.5, -1.38912)
+flip_faces = true
+size = Vector3(3, 1.5, 7.88666)
+
+[node name="Room2" type="CSGBox3D" parent="Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.871, -0.25, -22.799)
+flip_faces = true
+size = Vector3(30, 4, 30)
+
+[node name="Room3" type="CSGBox3D" parent="Room/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.302, -0.25, -0.949)
+flip_faces = true
+size = Vector3(8, 4, 4)
+
+[node name="Room4" type="CSGBox3D" parent="Room/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.4916, -0.745667, -39.9613)
+flip_faces = true
+size = Vector3(4.41187, 3.00867, 2.78955)
+
+[node name="Player" parent="." instance=ExtResource("2_axskv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.206848, 4.76837e-07, 3.03314)
+
+[node name="GunPickup" parent="." instance=ExtResource("3_gw6my")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4037, 0, -1.3661)
+
+[node name="enemies" type="Node3D" parent="."]
+
+[node name="Enemy" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.32173)
+move_speed = 2.0
+
+[node name="Enemy2" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34.9464)
+move_speed = 2.0
+
+[node name="Enemy3" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4527, 0, -34.9464)
+move_speed = 2.0
+
+[node name="Enemy4" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.1439, 0, -28.0071)
+move_speed = 2.0
+
+[node name="Enemy5" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44921, 0, -28.0071)
+move_speed = 2.0
+
+[node name="Enemy6" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.2898, 0, -22.0691)
+move_speed = 2.0
+
+[node name="Enemy7" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9829, 0, -27.6976)
+move_speed = 2.0
+
+[node name="Enemy8" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14637, 0, -27.6976)
+move_speed = 2.0
+
+[node name="Enemy9" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4284, 0, -18.7585)
+move_speed = 2.0
+
+[node name="Enemy10" parent="enemies" instance=ExtResource("4_3pdhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0373, 0, -34.0595)
+move_speed = 2.0
+
+[node name="Secreto" type="Sprite3D" parent="."]
+transform = Transform3D(-1.40958, 0, -8.74228e-08, 0, 1.36169, 0, 1.23229e-07, 0, -1, 14.9455, 2.54047, -7.80601)
+texture = ExtResource("5_stjhd")
+
+[node name="Salida" type="Sprite3D" parent="."]
+transform = Transform3D(1.55431, 0, 0, 0, 1.56906, 0, 0, 0, 1, 23.438, 1.22505, -42.1399)
+texture = ExtResource("6_ch3ja")
