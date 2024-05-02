@@ -5,6 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://cywmj6kr8ej87" path="res://assets/Enemies/duck_defeated.wav" id="3_n1g6y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3iaa3"]
+radius = 0.580399
+height = 2.12505
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rccbx"]
 atlas = ExtResource("2_gaxhp")
@@ -88,7 +90,7 @@ collision_mask = 3
 script = ExtResource("1_66pjn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0068047, 1, -0.00371718)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0068047, 1.07742, -0.00371718)
 shape = SubResource("CapsuleShape3D_3iaa3")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]

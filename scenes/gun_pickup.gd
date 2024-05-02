@@ -8,5 +8,7 @@ func _on_body_entered(body):
 			body.carried_guns.append(SHOTGUN)
 			$CollisionShape3D.disabled = true
 			$Sprite3D.hide()
+			body.currentWeapon += 1
+			body.change_gun(body.currentWeapon)
 		else:
 			pass
