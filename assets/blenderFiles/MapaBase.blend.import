@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b65t1sm7ho4fk"
-path="res://.godot/imported/tutorialMap.blend-b2a654f25274e1908f6be371fc96d9ec.scn"
+uid="uid://y5hngw8umyik"
+path="res://.godot/imported/MapaBase.blend-635c9dfa723d9c822e98517321c836e1.scn"
 
 [deps]
 
-source_file="res://assets/blenderFiles/tutorialMap.blend"
-dest_files=["res://.godot/imported/tutorialMap.blend-b2a654f25274e1908f6be371fc96d9ec.scn"]
+source_file="res://assets/blenderFiles/MapaBase.blend"
+dest_files=["res://.godot/imported/MapaBase.blend-635c9dfa723d9c822e98517321c836e1.scn"]
 
 [params]
 

@@ -4,11 +4,14 @@ class_name Player
 
 signal healthChanged
 
-#Bread gund
-@onready var animated_sprite_2d = $CanvasLayer/GunBase/AnimatedSprite2D
-@onready var shoot_ray = $Head/ShootingRay
-@onready var shoot_sound = $ShootSound
+
+#Bread guns
+@onready var PISTOL = preload("res://scenes/bread_pistol.tscn")
+@onready var SHOTGUN = preload("res://scenes/bread_shotgun.tscn")
 var can_shoot = true
+
+@onready var carried_guns = [PISTOL]
+var currentWeapon = 0
 
 #Body functions
 @onready var head_bump_check = $HeadBumpCheck
@@ -47,8 +50,7 @@ var isHurt: bool = false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	animated_sprite_2d.animation_finished.connect(shoot_anim_done)
-	$CanvasLayer/DeathScreen/Panel/Button.button_up.connect(restart)
+	$UI/DeathScreen/Panel/Button.button_up.connect(restart)
 
 func _input(event):
 	if dead:
@@ -68,8 +70,17 @@ func _process(delta):
 
 	if dead:
 		return
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
+	
+	if Input.is_action_just_pressed("next_weapon"):
+		currentWeapon += 1
+		if currentWeapon > len(carried_guns) - 1:
+			currentWeapon = 0
+		change_gun(currentWeapon)
+	elif Input.is_action_just_pressed("prev_weapon"):
+		currentWeapon -= 1
+		if currentWeapon < 0:
+			currentWeapon = len(carried_guns) - 1
+		change_gun(currentWeapon)
 
 func _physics_process(delta):
 	if dead:
@@ -138,17 +149,13 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
+func change_gun(gun):
+	$Head/BreadGuns.get_child(0).queue_free()
+	var new_gun = carried_guns[gun].instantiate()
+	$Head/BreadGuns.add_child(new_gun)
+
 func restart():
 	get_tree().reload_current_scene()
-
-func shoot():
-	if !can_shoot:
-		return
-	can_shoot = false
-	animated_sprite_2d.play("shoot")
-	shoot_sound.play()
-	if shoot_ray.is_colliding() and shoot_ray.get_collider().has_method("enemyDeath"):
-		shoot_ray.get_collider().enemyDeath()
 
 func shoot_anim_done():
 	can_shoot = true
@@ -162,6 +169,6 @@ func takeDamage():
 
 func playerDeath():
 	dead = true
-	$CanvasLayer/DeathScreen.show()
+	$UI/DeathScreen.show()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 

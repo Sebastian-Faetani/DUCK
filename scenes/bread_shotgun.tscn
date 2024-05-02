@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://d152u8wirunnc"]
+
+[ext_resource type="Script" path="res://scenes/BreadGun.gd" id="1_xruqi"]
+[ext_resource type="Texture2D" uid="uid://bpn2p83q0e50p" path="res://assets/Weapons/bread_shotgun_sprite.png" id="2_ycfh6"]
+[ext_resource type="Texture2D" uid="uid://bs1vyu60eflw8" path="res://assets/Weapons/BreadCrosshair.png" id="3_v8ynb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi4j2"]
+atlas = ExtResource("2_ycfh6")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsv71"]
+atlas = ExtResource("2_ycfh6")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlh0j"]
+atlas = ExtResource("2_ycfh6")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou8jk"]
+atlas = ExtResource("2_ycfh6")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjqvv"]
+atlas = ExtResource("2_ycfh6")
+region = Rect2(2048, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmr5i"]
+atlas = ExtResource("2_ycfh6")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hkejt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yi4j2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsv71")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_wlh0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou8jk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjqvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmr5i")
+}],
+"loop": false,
+"name": &"Shot",
+"speed": 8.0
+}]
+
+[node name="BreadShotgun" type="Node3D"]
+script = ExtResource("1_xruqi")
+gun_damage = 20
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GunAnim" type="AnimatedSprite2D" parent="CanvasLayer/Control"]
+position = Vector2(781, 460)
+scale = Vector2(0.849, 0.735)
+sprite_frames = SubResource("SpriteFrames_hkejt")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="ShotgunCross" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_v8ynb")
+expand_mode = 1
+
+[node name="GunRays" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="GunRays"]
+target_position = Vector3(0, 0, -15)
+collision_mask = 3
+
+[node name="RayCast3D2" type="RayCast3D" parent="GunRays"]
+transform = Transform3D(0.999758, 0, 0.0220068, 0, 1, 0, -0.0220068, 0, 0.999758, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 3
+
+[node name="RayCast3D3" type="RayCast3D" parent="GunRays"]
+transform = Transform3D(0.999602, 0, -0.0282008, -0.00157372, 0.998442, -0.0557819, 0.0281568, 0.0558041, 0.998045, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 3
+
+[node name="RayCast3D4" type="RayCast3D" parent="GunRays"]
+transform = Transform3D(0.999585, 0.000706941, 0.0288027, 0, 0.999699, -0.0245369, -0.0288114, 0.0245267, 0.999284, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 3
+
+[node name="RayCast3D5" type="RayCast3D" parent="GunRays"]
+transform = Transform3D(1, 0, 0, 0, 0.999607, 0.0280263, 0, -0.0280263, 0.999607, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 3
+
+[node name="RayCast3D6" type="RayCast3D" parent="GunRays"]
+transform = Transform3D(0.998302, 0, 0.0582436, 0, 1, 0, -0.0582436, 0, 0.998302, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 3
+
+[node name="RayCast3D7" type="RayCast3D" parent="GunRays"]
+transform = Transform3D(0.997043, 0, -0.0768408, 0, 1, 0, 0.0768408, 0, 0.997043, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 3
+
+[node name="RayCast3D8" type="RayCast3D" parent="GunRays"]
+transform = Transform3D(0.999142, 0, -0.0414223, 0, 1, 0, 0.0414223, 0, 0.999142, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 3

@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://80tse0fem85b"]
+
+[ext_resource type="Texture2D" uid="uid://jqkxxpg37dml" path="res://assets/Weapons/bread_gun_sprite.png" id="1_2kyqk"]
+[ext_resource type="Script" path="res://scenes/BreadGun.gd" id="1_goobt"]
+[ext_resource type="Texture2D" uid="uid://bs1vyu60eflw8" path="res://assets/Weapons/BreadCrosshair.png" id="3_mrdqa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_komh7"]
+atlas = ExtResource("1_2kyqk")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_heboc"]
+atlas = ExtResource("1_2kyqk")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lomfq"]
+atlas = ExtResource("1_2kyqk")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0dlc"]
+atlas = ExtResource("1_2kyqk")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ao48n"]
+atlas = ExtResource("1_2kyqk")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hkejt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_komh7")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_heboc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lomfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0dlc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ao48n")
+}],
+"loop": false,
+"name": &"Shot",
+"speed": 10.0
+}]
+
+[node name="BreadPistol" type="Node3D"]
+script = ExtResource("1_goobt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GunAnim" type="AnimatedSprite2D" parent="CanvasLayer/Control"]
+position = Vector2(781, 502)
+scale = Vector2(0.659, 0.571)
+sprite_frames = SubResource("SpriteFrames_hkejt")
+animation = &"Shot"
+autoplay = "Idle"
+
+[node name="PistolCross" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 568.0
+offset_top = 316.0
+offset_right = 584.0
+offset_bottom = 332.0
+texture = ExtResource("3_mrdqa")
+expand_mode = 1
+
+[node name="GunRays" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="GunRays"]
+target_position = Vector3(0, 0, -100)
+collision_mask = 3

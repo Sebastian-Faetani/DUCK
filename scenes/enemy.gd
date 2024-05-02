@@ -6,11 +6,15 @@ class_name Enemy
 
 @export var move_speed = 6.0
 @export var attack_range = 2.0
-@export var enemy_health = 20
+@export var enemy_max_health = 20
+@onready var enemy_current_health = enemy_max_health
 @export var enemyDamage = 0.001
 
 @onready var player : CharacterBody3D = get_tree().get_first_node_in_group("player")
 var enemyDead = false
+
+func _ready():
+	animated_sprite_3d.animation_finished.connect(queue_free)
 
 func _physics_process(delta):
 	if enemyDead:
@@ -38,10 +42,14 @@ func attempt_to_kill_player():
 	if result.is_empty():
 		player.takeDamage()
 
+func enemyTakeDamage(dmg_amount):
+	enemy_current_health -= dmg_amount
+	if enemy_current_health <= 0:
+		enemyDeath()
+
 func enemyDeath():
 	enemyDead = true
 	$DeathSound.play()
 	animated_sprite_3d.play("death")
 	$CollisionShape3D.disabled = true
-
 

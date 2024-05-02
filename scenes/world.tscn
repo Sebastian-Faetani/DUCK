@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://lpwxjfctwlay"]
+[gd_scene load_steps=30 format=3 uid="uid://lpwxjfctwlay"]
 
 [ext_resource type="Texture2D" uid="uid://b705by1dh0pkd" path="res://assets/worldTextures/francegrassfull.jpg" id="1_a76vx"]
 [ext_resource type="Texture2D" uid="uid://brkip5wk60hhj" path="res://assets/worldTextures/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_jl5af"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b6v6t3p5js8g1" path="res://assets/worldTextures/stonygrass.jpg" id="2_24wik"]
 [ext_resource type="Texture2D" uid="uid://b2asbpikilok8" path="res://assets/worldTextures/04pietrac1.png" id="2_68we5"]
 [ext_resource type="PackedScene" uid="uid://detqv1egjtttf" path="res://scenes/enemy.tscn" id="2_axeyx"]
+[ext_resource type="PackedScene" uid="uid://bbfpbj3rbkleb" path="res://scenes/gun_pickup.tscn" id="7_msbxd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr22n"]
 albedo_texture = ExtResource("1_a76vx")
@@ -257,3 +258,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.798369, 0.0151401, -11.2941
 
 [node name="Enemy10" parent="." instance=ExtResource("2_axeyx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41746, 0.0151401, -13.225)
+
+[node name="GunPickup" parent="." instance=ExtResource("7_msbxd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47105, 48.2274)

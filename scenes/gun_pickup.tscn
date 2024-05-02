@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbfpbj3rbkleb"]
+
+[ext_resource type="Script" path="res://scenes/gun_pickup.gd" id="1_vlvie"]
+[ext_resource type="Texture2D" uid="uid://c7mmkelpsmyty" path="res://assets/PickUpSprites/ShotgunPickUpSprite.png" id="2_bh18n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y2evi"]
+size = Vector3(1.18156, 0.69812, 0.777199)
+
+[node name="GunPickup" type="Area3D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_vlvie")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.307422, 0)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_bh18n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0245132, 0.34906, 0.0457883)
+shape = SubResource("BoxShape3D_y2evi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
