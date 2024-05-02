@@ -61,7 +61,7 @@ func _input(event):
 		head.rotate_x(deg_to_rad(-event.relative.y * MOUSE_SENS))
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
-func _process(delta):
+func _process(_delta):
 	healthChanged.emit()
 	if Input.is_action_just_pressed("exit"):
 		get_tree().quit()

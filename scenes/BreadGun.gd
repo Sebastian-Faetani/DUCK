@@ -16,7 +16,7 @@ func check_hit():
 			if ray.get_collider().is_in_group("enemies"):
 				ray.get_collider().enemyTakeDamage(gun_damage)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("shoot") and can_shoot == true:
 		gun_sprite.play("Shot")
 		check_hit()

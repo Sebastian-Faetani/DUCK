@@ -107,4 +107,6 @@ stream = ExtResource("3_n1g6y")
 unit_size = 2.0
 bus = &"Sound effects"
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

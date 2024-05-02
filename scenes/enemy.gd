@@ -16,7 +16,7 @@ var enemyDead = false
 func _ready():
 	animated_sprite_3d.animation_finished.connect(queue_free)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if enemyDead:
 		return
 	if player == null:

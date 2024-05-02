@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://del3xlyon0j41"]
+[gd_scene load_steps=12 format=3 uid="uid://del3xlyon0j41"]
 
 [ext_resource type="Texture2D" uid="uid://bkrgwalj64mx4" path="res://assets/worldTextures/prototype-texture-with-size.png" id="1_k7yep"]
 [ext_resource type="PackedScene" uid="uid://dq5irbtv6gjdd" path="res://scenes/player.tscn" id="2_axskv"]
@@ -20,6 +20,10 @@ sky = SubResource("Sky_hrph8")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_6klof"]
+vertices = PackedVector3Array(-5.59988, 0.5, -20.4172, -5.59988, 0.5, -17.9172, -3.59988, 0.5, -17.6672, -3.59988, 0.5, -20.6672, -3.59988, 0.5, -17.6672, -3.59988, 0.5, -8.41724, 25.1501, 0.5, -8.41724, 24.1501, 0.5, -37.4172, 24.1501, 0.5, -41.4172, 22.6501, 0.5, -41.4172, 22.4001, 0.5, -37.1672, 22.4001, 0.5, -37.1672, -3.59988, 0.5, -37.1672, -3.59988, 0.5, -20.6672, 25.1501, 0.5, -37.1672, 24.1501, 0.5, -37.4172, 22.4001, 0.5, -37.1672, -3.59988, 0.5, -20.6672, -3.59988, 0.5, -17.6672, 25.1501, 0.5, -8.41724, -7.34988, 0.5, -17.9172, -5.59988, 0.5, -17.9172, -5.59988, 0.5, -20.4172, -7.59988, 0.5, -20.6672, -7.59988, 0.5, -20.6672, -7.59988, 0.5, -30.1672, -23.5999, 0.5, -30.1672, -23.5999, 0.5, -16.6672, -7.59988, 0.5, -16.6672, -7.34988, 0.5, -17.9172, -7.59988, 0.5, -20.6672, -23.5999, 0.5, -16.6672, 21.9001, 0.5, -4.41724, 21.9001, 0.5, 2.33276, 24.6501, 0.5, 2.33276, 24.6501, 0.5, -4.41724, -3.34988, 0.5, -3.41724, -3.34988, 0.5, 3.33276, 3.40012, 0.5, 3.33276, 3.40012, 0.5, -3.41724)
+polygons = [PackedInt32Array(0, 3, 1), PackedInt32Array(1, 3, 2), PackedInt32Array(6, 5, 4), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(13, 12, 11), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 19), PackedInt32Array(16, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(29, 28, 30), PackedInt32Array(30, 28, 31), PackedInt32Array(35, 34, 32), PackedInt32Array(32, 34, 33), PackedInt32Array(39, 38, 36), PackedInt32Array(36, 38, 37)]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnwm5"]
 albedo_texture = ExtResource("1_k7yep")
 uv1_triplanar = true
@@ -32,46 +36,6 @@ environment = SubResource("Environment_yjgcu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-
-[node name="Room" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material_override = SubResource("StandardMaterial3D_fnwm5")
-use_collision = true
-flip_faces = true
-size = Vector3(8, 4, 8)
-
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256059, 0)
-
-[node name="Corridor" type="CSGBox3D" parent="Room/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -5.994)
-flip_faces = true
-size = Vector3(3, 1.5, 4)
-
-[node name="Corridor2" type="CSGBox3D" parent="Room/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.935, -1.5, -3.85667)
-flip_faces = true
-size = Vector3(3, 1.5, 7.88666)
-
-[node name="Corridor3" type="CSGBox3D" parent="Room/CSGCombiner3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.3589, -1.5, -1.38912)
-flip_faces = true
-size = Vector3(3, 1.5, 7.88666)
-
-[node name="Room2" type="CSGBox3D" parent="Room/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.871, -0.25, -22.799)
-flip_faces = true
-size = Vector3(30, 4, 30)
-
-[node name="Room3" type="CSGBox3D" parent="Room/CSGCombiner3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.302, -0.25, -0.949)
-flip_faces = true
-size = Vector3(8, 4, 4)
-
-[node name="Room4" type="CSGBox3D" parent="Room/CSGCombiner3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.4916, -0.745667, -39.9613)
-flip_faces = true
-size = Vector3(4.41187, 3.00867, 2.78955)
 
 [node name="Player" parent="." instance=ExtResource("2_axskv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.206848, 4.76837e-07, 3.03314)
@@ -102,7 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44921, 0, -28.0071)
 move_speed = 2.0
 
 [node name="Enemy6" parent="enemies" instance=ExtResource("4_3pdhc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.2898, 0, -22.0691)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2653, 0, -25.8378)
 move_speed = 2.0
 
 [node name="Enemy7" parent="enemies" instance=ExtResource("4_3pdhc")]
@@ -110,7 +74,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9829, 0, -27.6976)
 move_speed = 2.0
 
 [node name="Enemy8" parent="enemies" instance=ExtResource("4_3pdhc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14637, 0, -27.6976)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1606, 0, -27.6976)
 move_speed = 2.0
 
 [node name="Enemy9" parent="enemies" instance=ExtResource("4_3pdhc")]
@@ -128,3 +92,58 @@ texture = ExtResource("5_stjhd")
 [node name="Salida" type="Sprite3D" parent="."]
 transform = Transform3D(1.55431, 0, 0, 0, 1.56906, 0, 0, 0, 1, 23.438, 1.22505, -42.1399)
 texture = ExtResource("6_ch3ja")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_6klof")
+
+[node name="LevelLayout" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="Room" type="CSGBox3D" parent="NavigationRegion3D/LevelLayout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_fnwm5")
+use_collision = true
+flip_faces = true
+size = Vector3(8, 4, 8)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/LevelLayout/Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256059, 0)
+
+[node name="Corridor" type="CSGBox3D" parent="NavigationRegion3D/LevelLayout/Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -5.994)
+flip_faces = true
+size = Vector3(3, 1.5, 4)
+
+[node name="Corridor2" type="CSGBox3D" parent="NavigationRegion3D/LevelLayout/Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.935, -1.5, -3.85667)
+flip_faces = true
+size = Vector3(3, 1.5, 7.88666)
+
+[node name="Corridor4" type="CSGBox3D" parent="NavigationRegion3D/LevelLayout/Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.61064, -0.749512, -19.1697)
+flip_faces = true
+size = Vector3(3, 3.00098, 3.81296)
+
+[node name="Corridor3" type="CSGBox3D" parent="NavigationRegion3D/LevelLayout/Room/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.3716, -1.5, -1.38912)
+flip_faces = true
+size = Vector3(3, 1.5, 7.8613)
+
+[node name="Room2" type="CSGBox3D" parent="NavigationRegion3D/LevelLayout/Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.871, -0.25, -22.799)
+flip_faces = true
+size = Vector3(30, 4, 30)
+
+[node name="Room3" type="CSGBox3D" parent="NavigationRegion3D/LevelLayout/Room/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.302, -0.25, -0.949)
+flip_faces = true
+size = Vector3(8, 4, 4)
+
+[node name="Room4" type="CSGBox3D" parent="NavigationRegion3D/LevelLayout/Room/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.4916, -0.745667, -39.9613)
+flip_faces = true
+size = Vector3(4.41187, 3.00867, 2.78955)
+
+[node name="Room5" type="CSGBox3D" parent="NavigationRegion3D/LevelLayout/Room/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.72, -0.25, -23.434)
+flip_faces = true
+size = Vector3(14.8199, 4, 17.2598)
