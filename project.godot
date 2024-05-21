@@ -101,6 +101,10 @@ next_weapon={
 3d_physics/layer_1="enviroment"
 3d_physics/layer_2="characters"
 
+[physics]
+
+3d/default_gravity_vector=Vector3(0, -2, 0)
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

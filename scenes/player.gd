@@ -4,6 +4,7 @@ class_name Player
 
 signal healthChanged
 
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #Bread guns
 @onready var PISTOL = preload("res://scenes/bread_pistol.tscn")
@@ -86,6 +87,9 @@ func _physics_process(delta):
 	if dead:
 		return
 	
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	
 	var input_dir = Input.get_vector("move_left", "move_right", "move_foward", "move_backwards")
 	
 	if Input.is_action_pressed("crouch") || sliding:
@@ -156,9 +160,6 @@ func change_gun(gun):
 
 func restart():
 	get_tree().reload_current_scene()
-
-func shoot_anim_done():
-	can_shoot = true
 
 func takeDamage():
 	CURRENT_PLAYER_HEALTH -= 0.01
