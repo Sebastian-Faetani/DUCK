@@ -1,0 +1,191 @@
+[gd_scene load_steps=25 format=3 uid="uid://detqv1egjtttf"]
+
+[ext_resource type="Script" path="res://scenes/Old enemy/enemy.gd" id="1_66pjn"]
+[ext_resource type="Texture2D" uid="uid://ctk3x6fcbdp0p" path="res://assets/Enemies/Enemy_spritesheet_baguette.png" id="2_lei62"]
+[ext_resource type="AudioStream" uid="uid://cywmj6kr8ej87" path="res://assets/Enemies/duck_defeated.wav" id="3_n1g6y"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3iaa3"]
+radius = 0.580399
+height = 2.12505
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqlmp"]
+albedo_color = Color(0.262745, 0.717647, 0.552941, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_mmh51"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bc5j"]
+albedo_color = Color(0.992157, 0.976471, 0.254902, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uh3tr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyeen"]
+atlas = ExtResource("2_lei62")
+region = Rect2(1658, 0, 829, 711)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8oub"]
+atlas = ExtResource("2_lei62")
+region = Rect2(2487, 0, 829, 711)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjr4m"]
+atlas = ExtResource("2_lei62")
+region = Rect2(3316, 0, 829, 711)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjssl"]
+atlas = ExtResource("2_lei62")
+region = Rect2(0, 0, 829, 711)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8bec"]
+atlas = ExtResource("2_lei62")
+region = Rect2(0, 2840, 829, 710)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i63f8"]
+atlas = ExtResource("2_lei62")
+region = Rect2(829, 2840, 829, 710)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ixh6"]
+atlas = ExtResource("2_lei62")
+region = Rect2(1658, 2840, 829, 710)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5qm0"]
+atlas = ExtResource("2_lei62")
+region = Rect2(2487, 2840, 829, 710)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f23a2"]
+atlas = ExtResource("2_lei62")
+region = Rect2(3316, 2840, 829, 710)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bykv3"]
+atlas = ExtResource("2_lei62")
+region = Rect2(0, 710, 829, 710)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpua6"]
+atlas = ExtResource("2_lei62")
+region = Rect2(829, 710, 829, 710)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kv1dy"]
+atlas = ExtResource("2_lei62")
+region = Rect2(1658, 710, 829, 710)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_833qo"]
+atlas = ExtResource("2_lei62")
+region = Rect2(2487, 710, 829, 710)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgjho"]
+atlas = ExtResource("2_lei62")
+region = Rect2(3316, 710, 829, 710)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y1aab"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyeen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8oub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjr4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjssl")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8bec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i63f8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ixh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5qm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f23a2")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bykv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpua6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv1dy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_833qo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgjho")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fqlcv"]
+radius = 2.031
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
+transform = Transform3D(0.561917, 0, 0, 0, 0.561917, 0, 0, 0, 0.561917, 0, 0.0607941, 0)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_66pjn")
+move_speed = 2.0
+
+[node name="AttackSpeedTimer" type="Timer" parent="."]
+
+[node name="enemyBody" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0068047, 0.983628, -0.00371718)
+shape = SubResource("CapsuleShape3D_3iaa3")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64738, 0)
+visible = false
+material_overlay = SubResource("StandardMaterial3D_sqlmp")
+mesh = SubResource("SphereMesh_mmh51")
+
+[node name="Beak" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.660378, 0, 0, 0, 0.0771353, 0, 0, 0, 0.661577, 0, 1.54833, 0.344197)
+visible = false
+material_overlay = SubResource("StandardMaterial3D_0bc5j")
+mesh = SubResource("CylinderMesh_uh3tr")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.374604, 0, 0, 0, 0.374604, 0, 0, 0, 0.374604, -4.76837e-07, 0.758801, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_y1aab")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.110264
+
+[node name="DeathSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_n1g6y")
+unit_size = 2.0
+bus = &"Sound effects"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="hurtbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_fqlcv")
+
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_exited" from="hurtbox" to="." method="_on_hurtbox_body_exited"]

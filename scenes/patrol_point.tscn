@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw4hu63ld4mcq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_g3g2o"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0lrst"]
+
+[node name="PatrolPoint" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0936833, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_g3g2o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_0lrst")

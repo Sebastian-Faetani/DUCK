@@ -46,7 +46,17 @@ var SLIDE_SPEED = 13.0
 #Life
 
 @export var MAX_PLAYER_HEALTH = 100
-@onready var CURRENT_PLAYER_HEALTH: int = MAX_PLAYER_HEALTH
+@onready var CURRENT_PLAYER_HEALTH: int = MAX_PLAYER_HEALTH:
+	set(value):
+		CURRENT_PLAYER_HEALTH = value
+		isHurt = true
+		healthChanged.emit()
+		if CURRENT_PLAYER_HEALTH <= 0:
+				dead = true
+				can_shoot = false
+				$UI/DeathScreen.show()
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				
 var isHurt: bool = false
 
 func _ready():
@@ -161,15 +171,15 @@ func change_gun(gun):
 func restart():
 	get_tree().reload_current_scene()
 
-func takeDamage():
-	CURRENT_PLAYER_HEALTH -= 0.01
-	isHurt = true
-	healthChanged.emit()
-	if CURRENT_PLAYER_HEALTH <= 0:
-		playerDeath()
-
-func playerDeath():
-	dead = true
-	$UI/DeathScreen.show()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+#func takeDamage():
+	#CURRENT_PLAYER_HEALTH -= 20
+	#isHurt = true
+	#healthChanged.emit()
+	#if CURRENT_PLAYER_HEALTH <= 0:
+		#playerDeath()
+#
+#func playerDeath():
+	#dead = true
+	#$UI/DeathScreen.show()
+	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 

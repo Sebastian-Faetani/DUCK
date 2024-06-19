@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/HealthBar.gd" id="4_nrjlt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pq845"]
+height = 1.79707
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqa1m"]
 height = 1.2
@@ -20,7 +21,7 @@ script = ExtResource("1_k22a3")
 MOUSE_SENS = 0.2
 
 [node name="StandingCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_pq845")
 
 [node name="CrouchingCollision" type="CollisionShape3D" parent="."]
@@ -32,7 +33,7 @@ disabled = true
 target_position = Vector3(0, 2, 0)
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00555629, 1.5242, 0.0487224)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00555629, 1.36611, 0.0487224)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001634, 0)
