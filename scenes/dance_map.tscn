@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://pdsv5ligaxru"]
+
+[ext_resource type="Texture2D" uid="uid://bkrgwalj64mx4" path="res://assets/worldTextures/prototype-texture-with-size.png" id="1_35hgb"]
+[ext_resource type="PackedScene" uid="uid://oe28peqnvf52" path="res://scenes/enemy.tscn" id="2_1a5wl"]
+[ext_resource type="PackedScene" uid="uid://dq5irbtv6gjdd" path="res://scenes/player.tscn" id="3_xk77i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ye8mr"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_safyv"]
+sky_material = SubResource("ProceduralSkyMaterial_ye8mr")
+
+[sub_resource type="Environment" id="Environment_ken12"]
+background_mode = 2
+sky = SubResource("Sky_safyv")
+tonemap_mode = 2
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_y3a0g"]
+vertices = PackedVector3Array(-63.5, 1, -63.5, -63.5, 1, 63.5, 63.5, 1, 63.5, 63.5, 1, -63.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76jjl"]
+albedo_texture = ExtResource("1_35hgb")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="Dance map" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ken12")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_y3a0g")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+material_override = SubResource("StandardMaterial3D_76jjl")
+use_collision = true
+size = Vector3(128, 1, 128)
+
+[node name="Enemy" parent="." instance=ExtResource("2_1a5wl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.491519, -13.5705)
+
+[node name="Player" parent="." instance=ExtResource("3_xk77i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0252229, 0.60935, 19.624)

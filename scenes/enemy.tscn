@@ -1,8 +1,7 @@
-[gd_scene load_steps=47 format=3 uid="uid://oe28peqnvf52"]
+[gd_scene load_steps=42 format=3 uid="uid://oe28peqnvf52"]
 
 [ext_resource type="Script" path="res://scenes/new_enemy.gd" id="1_3el7w"]
 [ext_resource type="Texture2D" uid="uid://jp6hi0vc1oke" path="res://assets/Enemies/DuckEnemySpriteSheet.png" id="2_gaxhp"]
-[ext_resource type="Script" path="res://scenes/State Machine.gd" id="3_k7pov"]
 [ext_resource type="Texture2D" uid="uid://vmx1tr6a1g7x" path="res://assets/Enemies/PatoMacarena-Sheet.png" id="3_ktq03"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8hjk"]
@@ -249,9 +248,37 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_2mecf"]
+resource_name = "dance"
+length = 3.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dance"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 3.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
 [sub_resource type="Animation" id="Animation_vsgh8"]
 resource_name = "death"
-length = 1.2
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -275,6 +302,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_3pwn1"]
@@ -304,34 +345,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"idle"]
-}
-
-[sub_resource type="Animation" id="Animation_2mecf"]
-resource_name = "dance"
-length = 3.8
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"dance"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 3.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1ta0n"]
@@ -368,28 +381,19 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oan4p"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_okdx2"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ghm64"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k8ee2"]
-switch_mode = 2
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_x0ikh"]
 states/End/position = Vector2(995, 100)
 states/Start/position = Vector2(199, 100)
 states/attack/node = SubResource("AnimationNodeAnimation_h04ej")
 states/attack/position = Vector2(659, 61)
 states/dance/node = SubResource("AnimationNodeAnimation_t8j5p")
-states/dance/position = Vector2(437, 173)
+states/dance/position = Vector2(539, 186)
 states/death/node = SubResource("AnimationNodeAnimation_1khmb")
 states/death/position = Vector2(759, 211)
 states/idle/node = SubResource("AnimationNodeAnimation_jpk4t")
 states/idle/position = Vector2(437, 61)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_mtl0u"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_11etj"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_aj0yy"), "death", "End", SubResource("AnimationNodeStateMachineTransition_bewsb"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_oan4p"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_okdx2"), "idle", "dance", SubResource("AnimationNodeStateMachineTransition_ghm64"), "dance", "idle", SubResource("AnimationNodeStateMachineTransition_k8ee2")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_mtl0u"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_11etj"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_aj0yy"), "death", "End", SubResource("AnimationNodeStateMachineTransition_bewsb")]
+graph_offset = Vector2(-38, 4)
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 script = ExtResource("1_3el7w")
@@ -409,7 +413,6 @@ shape = SubResource("CapsuleShape3D_a7ida")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
-debug_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -419,14 +422,20 @@ libraries = {
 [node name="AttackCooldown" type="Timer" parent="."]
 
 [node name="DanceTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 4.0
+one_shot = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_x0ikh")
+advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_k7pov")
-initial_state = NodePath("")
 
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="DanceTimer" to="." method="_on_dance_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

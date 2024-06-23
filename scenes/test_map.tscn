@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bew42gngdi6k8"]
+[gd_scene load_steps=14 format=3 uid="uid://bew42gngdi6k8"]
 
 [ext_resource type="Texture2D" uid="uid://chtmbi1vgocwx" path="res://assets/worldTextures/satara_night_no_lamps_2k.hdr" id="1_m0ysr"]
 [ext_resource type="PackedScene" uid="uid://dq5irbtv6gjdd" path="res://scenes/player.tscn" id="2_hpmsl"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cwlh0wwrsfk66" path="res://assets/blenderFiles/tree_072.tscn" id="3_phsem"]
 [ext_resource type="PackedScene" uid="uid://q7nyar4g15i7" path="res://assets/blenderFiles/tree01.tscn" id="4_m0iok"]
 [ext_resource type="PackedScene" uid="uid://oe28peqnvf52" path="res://scenes/enemy.tscn" id="4_pwgl8"]
+[ext_resource type="PackedScene" uid="uid://bbfpbj3rbkleb" path="res://scenes/gun_pickup.tscn" id="7_541kx"]
+[ext_resource type="FontFile" uid="uid://dltpi0wumvquw" path="res://assets/Fonts/GladlyAcceptRegular-Wyjov.ttf" id="8_rmh6y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yx3oa"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -1065,4 +1067,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.5815, 0, 124.937)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5815, 0, -47.3963)
 
 [node name="Player" parent="." instance=ExtResource("2_hpmsl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5773, 4.76837e-07, 10.4438)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2249, 4.76837e-07, 23.5281)
+
+[node name="GunPickup" parent="." instance=ExtResource("7_541kx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7176, 0, 4.79174)
+
+[node name="Instructions" type="Label3D" parent="."]
+transform = Transform3D(1.645, 0, 0, 0, 1.645, 0, 0, 0, 1.645, 21.1275, 2.19251, 20.2629)
+text = "Moverse = WASD
+Disparar = Click derecho
+cAMBIAR DE ARMA = Ruedita 
+Agacharse = CTRL
+CORRER = SHIFT
+Deslizarse = Shift + ctrl
+
+"
+font = ExtResource("8_rmh6y")
