@@ -64,6 +64,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
+	var next_position = navigation_agent_3d.get_next_path_position()
 	distance = global_position.distance_to(player.global_position)
 	#print(current_state)
 	match current_state:
@@ -98,14 +99,13 @@ func _physics_process(delta):
 #func _physics_process(delta):
 	if enemyDead == true:
 		return
-	var next_position = navigation_agent_3d.get_next_path_position()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
 	
-
 	var direction = global_position.direction_to(next_position)
+
 	
 
 	if direction:

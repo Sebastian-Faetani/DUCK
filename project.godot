@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="DoomDuck"
+config/name="DuckFeedingSim"
 run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
